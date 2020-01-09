@@ -58,6 +58,11 @@ namespace RobotsVsDinosaurs
 
                         playerRunning = true;
 
+                        if(roboFleet[i].health <= 0)
+                        {
+                            break;
+                        }
+
                         Console.WriteLine("Who should " + roboFleet[i].name + " attack?");
                         if (targetHerd.dinoHerd[0].health >= 0)
                         {
