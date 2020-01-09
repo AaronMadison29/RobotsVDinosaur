@@ -55,18 +55,15 @@ namespace RobotsVsDinosaurs
             {
                 case "1":
                     weapon = roboWeapons[0];
-                    Console.Clear();
-                    Console.WriteLine("Bob switched to his " + weapon.weaponType);
+                    Console.WriteLine("\nBob switched to his " + weapon.weaponType);
                     break;
                 case "2":
                     weapon = roboWeapons[1];
-                    Console.Clear();
-                    Console.WriteLine("Bob switched to his " + weapon.weaponType);
+                    Console.WriteLine("\nBob switched to his " + weapon.weaponType);
                     break;
                 case "3":
                     weapon = roboWeapons[2];
-                    Console.Clear();
-                    Console.WriteLine("Bob switched to his " + weapon.weaponType);
+                    Console.WriteLine("\nBob switched to his " + weapon.weaponType);
                     break;
                 default:
                     break;
@@ -76,7 +73,6 @@ namespace RobotsVsDinosaurs
 
         public void Attack(Dinosaur dinoTarget)
         {
-            
 
             dinoTarget.health -= attackPower + weapon.powerLevel;
             Console.WriteLine("\n" + name + " attacked " + dinoTarget.type + " with " + weapon.weaponType + " for " + (attackPower + weapon.powerLevel) + " damage.");

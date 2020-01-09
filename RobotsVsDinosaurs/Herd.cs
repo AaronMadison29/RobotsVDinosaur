@@ -121,7 +121,6 @@ namespace RobotsVsDinosaurs
                                 }
                                 else
                                 {
-                                    Console.Clear();
                                     Console.WriteLine(targetFleet.roboFleet[0].name + " has already been defeated, please choose another dino");
                                 }
                                 break;
@@ -133,7 +132,6 @@ namespace RobotsVsDinosaurs
                                 }
                                 else
                                 {
-                                    Console.Clear();
                                     Console.WriteLine(targetFleet.roboFleet[1].name + " has already been defeated, please choose another dino");
                                 }
                                 break;
@@ -145,12 +143,10 @@ namespace RobotsVsDinosaurs
                                 }
                                 else
                                 {
-                                    Console.Clear();
                                     Console.WriteLine(targetFleet.roboFleet[2].name + " has already been defeated, please choose another dino");
                                 }
                                 break;
                             default:
-                                Console.Clear();
                                 Console.WriteLine("Please choose a valid Dino");
                                 break;
                         }

@@ -103,7 +103,6 @@ namespace RobotsVsDinosaurs
                                 }
                                 else
                                 {
-                                    Console.Clear();
                                     Console.WriteLine(targetHerd.dinoHerd[0].type + " has already been defeated, please choose another dino");
                                 }
                                 break;
@@ -115,7 +114,6 @@ namespace RobotsVsDinosaurs
                                 }
                                 else
                                 {
-                                    Console.Clear();
                                     Console.WriteLine(targetHerd.dinoHerd[1].type + " has already been defeated, please choose another dino");
                                 }
                                 break;
@@ -127,12 +125,10 @@ namespace RobotsVsDinosaurs
                                 }
                                 else
                                 {
-                                    Console.Clear();
                                     Console.WriteLine(targetHerd.dinoHerd[2].type + " has already been defeated, please choose another dino");
                                 }
                                 break;
                             default:
-                                Console.Clear();
                                 Console.WriteLine("Please choose a valid Dino");
                                 break;
                         }

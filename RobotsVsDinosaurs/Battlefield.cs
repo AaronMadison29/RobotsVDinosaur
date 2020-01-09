@@ -64,13 +64,16 @@ namespace RobotsVsDinosaurs
                 if (robos.player == true || dinos.player == true)
                 {
                     break;
+
                 }
-            }
+
                 
+            }
 
 
+            Console.Clear();
 
-            
+
         }
 
         public void Battle()
@@ -81,7 +84,6 @@ namespace RobotsVsDinosaurs
             do
             {
 
-                Console.Clear();
                 if(robots.player && dinosaurs.player)
                 {
                     Console.WriteLine(robots.getFleetStats());
@@ -119,7 +121,6 @@ namespace RobotsVsDinosaurs
                 }
                 if (deathToll == 3)
                 {
-                    Console.Clear();
                     Console.WriteLine("\nRobots win!");
                     break;
                 }
@@ -139,7 +140,6 @@ namespace RobotsVsDinosaurs
                 }
                 if (deathToll == 3)
                 {
-                    Console.Clear();
                     Console.WriteLine("\nDinoSaurs win!");
                     break;
                 }
@@ -147,6 +147,7 @@ namespace RobotsVsDinosaurs
 
                 Console.WriteLine("\nPress Enter to start the next turn");
                 Console.ReadLine();
+                Console.Clear();
 
             } while (true);
             Console.ReadLine();
