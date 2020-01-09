@@ -10,7 +10,7 @@ namespace RobotsVsDinosaurs
     {
         public string name;
         public int health = 100;
-        int powerLevel;
+        public int powerLevel = 1;
         int attackPower = 5;
         List<Weapon> roboWeapons = new List<Weapon>();
         Random random = new Random();
@@ -44,36 +44,42 @@ namespace RobotsVsDinosaurs
                 weapon = roboWeapons[random.Next(0, 3)];
                 return;
             }
-
-            Console.WriteLine("Choose a weapon: ");
-            Console.WriteLine("1: Axe");
-            Console.WriteLine("2: Sword");
-            Console.WriteLine("3: Gun");
-            string weaponName = Console.ReadLine();
-
-            switch (weaponName)
+            else
             {
-                case "1":
-                    weapon = roboWeapons[0];
-                    Console.WriteLine("\nBob switched to his " + weapon.weaponType);
-                    break;
-                case "2":
-                    weapon = roboWeapons[1];
-                    Console.WriteLine("\nBob switched to his " + weapon.weaponType);
-                    break;
-                case "3":
-                    weapon = roboWeapons[2];
-                    Console.WriteLine("\nBob switched to his " + weapon.weaponType);
-                    break;
-                default:
-                    break;
-            }
-                
+                Console.WriteLine("Would you like to use a different weapon?(y/n)");
+                string choice = Console.ReadLine();
+                if (choice == "y")
+                {
+                    Console.WriteLine("Choose a weapon: ");
+                    Console.WriteLine("1: Axe");
+                    Console.WriteLine("2: Sword");
+                    Console.WriteLine("3: Gun");
+                    string weaponName = Console.ReadLine();
+
+                    switch (weaponName)
+                    {
+                        case "1":
+                            weapon = roboWeapons[0];
+                            Console.WriteLine("\nBob switched to his " + weapon.weaponType);
+                            break;
+                        case "2":
+                            weapon = roboWeapons[1];
+                            Console.WriteLine("\nBob switched to his " + weapon.weaponType);
+                            break;
+                        case "3":
+                            weapon = roboWeapons[2];
+                            Console.WriteLine("\nBob switched to his " + weapon.weaponType);
+                            break;
+                        default:
+                            break;
+                    }
+                }
+            }   
         }
 
-        public void Attack(Dinosaur dinoTarget)
+        public void Attack(Dinosaur dinoTarget, bool player)
         {
-
+            weaponSwap(player);
             dinoTarget.health -= attackPower + weapon.powerLevel;
             Console.WriteLine("\n" + name + " attacked " + dinoTarget.type + " with " + weapon.weaponType + " for " + (attackPower + weapon.powerLevel) + " damage.");
             if (dinoTarget.health <= 0)

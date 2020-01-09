@@ -44,6 +44,30 @@ namespace RobotsVsDinosaurs
 
             return fleetStats;
         }
+        
+        public bool checkHealth(Robot roboIn)
+        {
+            if (roboIn.health <= 0)
+            {
+                return false ;
+            }
+            else
+            {
+                return true;
+            }
+        }
+
+        public bool checkPowerLevel(Robot roboIn)
+        {
+            if (roboIn.powerLevel <= 0)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
 
         public void attackSequence(Herd targetHerd)
         {
@@ -58,10 +82,11 @@ namespace RobotsVsDinosaurs
 
                         playerRunning = true;
 
-                        if(roboFleet[i].health <= 0)
+                        if(!checkHealth(roboFleet[i]))
                         {
                             break;
                         }
+                        
 
                         Console.WriteLine("Who should " + roboFleet[i].name + " attack?");
                         if (targetHerd.dinoHerd[0].health >= 0)
@@ -91,19 +116,14 @@ namespace RobotsVsDinosaurs
                         }
                         string target = Console.ReadLine();
 
-                        Console.WriteLine("Would you like to use a different weapon?(y/n)");
-                        string choice = Console.ReadLine();
-                        if (choice == "y")
-                        {
-                            roboFleet[i].weaponSwap(player);
-                        }
+                        
 
                         switch (target)
                         {
                             case "1":
                                 if (targetHerd.dinoHerd[0].health > 0)
                                 {
-                                    roboFleet[i].Attack(targetHerd.dinoHerd[0]);
+                                    roboFleet[i].Attack(targetHerd.dinoHerd[0], player);
                                     playerRunning = false;
                                 }
                                 else
@@ -114,7 +134,7 @@ namespace RobotsVsDinosaurs
                             case "2":
                                 if (targetHerd.dinoHerd[1].health > 0)
                                 {
-                                    roboFleet[i].Attack(targetHerd.dinoHerd[1]);
+                                    roboFleet[i].Attack(targetHerd.dinoHerd[1], player);
                                     playerRunning = false;
                                 }
                                 else
@@ -125,7 +145,7 @@ namespace RobotsVsDinosaurs
                             case "3":
                                 if (targetHerd.dinoHerd[2].health > 0)
                                 {
-                                    roboFleet[i].Attack(targetHerd.dinoHerd[2]);
+                                    roboFleet[i].Attack(targetHerd.dinoHerd[2], player);
                                     playerRunning = false;
                                 }
                                 else
@@ -150,24 +170,24 @@ namespace RobotsVsDinosaurs
             {
                 for (int i = 0; i < roboFleet.Count; i++)
                 {
-                    if (roboFleet[i].health > 0)
+                    if (checkHealth(roboFleet[i]) && checkPowerLevel(roboFleet[i]))
                     {
                         if (targetHerd.dinoHerd[0].health > 0)
                         {
                             roboFleet[i].weaponSwap(player);
-                            roboFleet[i].Attack(targetHerd.dinoHerd[0]);
+                            roboFleet[i].Attack(targetHerd.dinoHerd[0], player);
                             break;
                         }
                         else if (targetHerd.dinoHerd[1].health > 0)
                         {
                             roboFleet[i].weaponSwap(player);
-                            roboFleet[i].Attack(targetHerd.dinoHerd[1]);
+                            roboFleet[i].Attack(targetHerd.dinoHerd[1], player);
                             break;
                         }
                         else if (targetHerd.dinoHerd[2].health > 0)
                         {
                             roboFleet[i].weaponSwap(player);
-                            roboFleet[i].Attack(targetHerd.dinoHerd[2]);
+                            roboFleet[i].Attack(targetHerd.dinoHerd[2], player);
                             break;
                         }
                     }

@@ -22,8 +22,8 @@ namespace RobotsVsDinosaurs
     {
         public string type;
         public int health = 50;
+        public int energy = 1;
         int attackPower = 10;
-        int energy;
         Weapon attack;
         Weapon[] attackArray = new Weapon[3];
         Weapon bite = new Weapon("Bite");
