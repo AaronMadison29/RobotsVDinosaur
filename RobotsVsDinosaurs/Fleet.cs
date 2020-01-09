@@ -37,7 +37,7 @@ namespace RobotsVsDinosaurs
                 }
                 else
                 {
-                    fleetStats = fleetStats + robo.name + ":" + robo.health + "HP ";
+                    fleetStats = fleetStats + robo.name + ":" + robo.health + "HP " + robo.powerLevel +" Energy";
                 }
                 
             }
@@ -86,7 +86,10 @@ namespace RobotsVsDinosaurs
                         {
                             break;
                         }
-                        
+                        if(!checkPowerLevel(roboFleet[i]))
+                        {
+                            break;
+                        }
 
                         Console.WriteLine("Who should " + roboFleet[i].name + " attack?");
                         if (targetHerd.dinoHerd[0].health >= 0)

@@ -22,7 +22,7 @@ namespace RobotsVsDinosaurs
     {
         public string type;
         public int health = 50;
-        public int energy = 1;
+        public int energy;
         int attackPower = 10;
         Weapon attack;
         Weapon[] attackArray = new Weapon[3];
@@ -52,6 +52,7 @@ namespace RobotsVsDinosaurs
             weaponSwap();
 
             roboTarget.health -= attackPower + attack.powerLevel;
+            energy--;
             Console.WriteLine("\n" + this.type + " attacked " + roboTarget.name + " with " + attack.weaponType + " for " + (attackPower + attack.powerLevel) + " damage.");
             if(roboTarget.health <= 0)
             {

@@ -60,7 +60,7 @@ namespace RobotsVsDinosaurs
                 }
                 else
                 {
-                    herdStats = herdStats + dino.type + ":" + dino.health + "HP ";
+                    herdStats = herdStats + dino.type + ":" + dino.health + "HP " + dino.energy + " Energy";
                 }
 
             }
@@ -75,7 +75,7 @@ namespace RobotsVsDinosaurs
             {
                 for (int i = 0; i < dinoHerd.Count; i++)
                 {
-                    if (checkHealth(dinoHerd[i]) && checkEnergy(dinoHerd[i]))
+                    if (checkHealth(dinoHerd[i]) && !checkEnergy(dinoHerd[i]))
                     {
                         if (targetFleet.roboFleet[0].health > 0)
                         {
@@ -105,7 +105,11 @@ namespace RobotsVsDinosaurs
                     do
                     {
 
-                        if (dinoHerd[i].health <= 0)
+                        if(!checkHealth(dinoHerd[i]))
+                        {
+                            break;
+                        }
+                        if(!checkEnergy(dinoHerd[i]))
                         {
                             break;
                         }
