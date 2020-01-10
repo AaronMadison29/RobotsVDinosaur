@@ -49,11 +49,14 @@ namespace RobotsVsDinosaurs
             weaponSwap();
             attacker = true;
             energy--;
-            
+
+
+
             if (attack.swing())
             {
-                roboTarget.health -= attackPower + attack.attackPower;
-                Console.WriteLine("\n" + this.type + " hit " + roboTarget.name + " with " + attack.weaponType + " for " + (attackPower + attack.attackPower) + " damage.");
+                int damage = attackPower + random.Next(1, attack.attackPower + 1);
+                roboTarget.health -= damage;
+                Console.WriteLine("\n" + this.type + " hit " + roboTarget.name + " with his " + attack.weaponType + " for " + damage + " damage.");
                 if (roboTarget.health <= 0)
                 {
                     Console.WriteLine("\nKnockout!");
@@ -65,10 +68,10 @@ namespace RobotsVsDinosaurs
             }
             else
             {
-                Console.WriteLine("\n" + type + " attacked " + roboTarget.name + " with " + attack.weaponType + " but missed!");
+                Console.WriteLine("\n" + type + " attacked " + roboTarget.name + " with his " + attack.weaponType + " but missed!");
             }
 
-            
+
         }
     }
 }

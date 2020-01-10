@@ -81,8 +81,9 @@ namespace RobotsVsDinosaurs
 
             if (weapon.swing())
             {
-                dinoTarget.health -= attackPower + weapon.attackPower;
-                Console.WriteLine("\n" + name + " hit " + dinoTarget.type + " with " + weapon.weaponType + " for " + (attackPower + weapon.attackPower) + " damage.");
+                int damage = attackPower + random.Next(1, weapon.attackPower + 1);
+                dinoTarget.health -= attackPower + damage;
+                Console.WriteLine("\n" + name + " hit " + dinoTarget.type + " with his " + weapon.weaponType + " for " + damage + " damage.");
                 if (dinoTarget.health <= 0)
                 {
                     Console.WriteLine("Knockout!");
@@ -94,7 +95,7 @@ namespace RobotsVsDinosaurs
             }
             else
             {
-                Console.WriteLine("\n" + name + " attacked " + dinoTarget.type + " with " + weapon.weaponType + " but missed!");
+                Console.WriteLine("\n" + name + " attacked " + dinoTarget.type + " with his " + weapon.weaponType + " but missed!");
             }
             
         }
