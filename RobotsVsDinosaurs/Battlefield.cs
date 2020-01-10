@@ -122,6 +122,9 @@ namespace RobotsVsDinosaurs
                 }
                 if (deathToll == 3)
                 {
+                    Console.Clear();
+                    Console.WriteLine(dinosaurs.GetStats());
+                    Console.WriteLine(robots.GetStats() + "\n");
                     Console.WriteLine("\nRobots win!");
                     break;
                 }

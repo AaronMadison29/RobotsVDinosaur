@@ -19,7 +19,7 @@ namespace RobotsVsDinosaurs
         Weapon weapon;
 
 
-        public Robot(string inputName, int inputEnergy, int inputHealth, int inputAttackPower) : base(inputName, inputEnergy, inputHealth, inputAttackPower)
+        public Robot(string inputName, int inputEnergy, int inputHealth, int inputAttackPower, bool isDinoIn) : base(inputName, inputEnergy, inputHealth, inputAttackPower, isDinoIn)
         {
             name = inputName;
             maxEnergy = inputEnergy;

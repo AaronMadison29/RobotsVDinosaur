@@ -80,9 +80,111 @@ namespace RobotsVsDinosaurs
             }
         }
 
-        public virtual void AttackSequence(FighterGroups fighters)
+        public void AttackSequence(FighterGroups fighters)
         {
+            bool playerRunning = true;
 
+            if (player)
+            {
+                for (int i = 0; i < group.Count(); i++)
+                {
+                    do
+                    {
+
+                        if (CheckHealth(group[i]))
+                        {
+                            break;
+                        }
+                        if (CheckEnergy(group[i]))
+                        {
+                            break;
+                        }
+
+                        Console.WriteLine("Who should " + group[i].name + " attack?");
+
+                        foreach (Fighter fighter in fighters.group)
+                        {
+                            if (fighter.health > 0)
+                            {
+                                Console.WriteLine("-" + fighter.name + "-" + "(" + fighter.health + " HP " + fighter.energy + "E)");
+                            }
+                            else
+                            {
+                                Console.WriteLine("-" + fighter.name + "-" + "(KO)");
+                            }
+                        }
+
+                        string target = Console.ReadLine();
+                        for (int j = 0; j <= fighters.group.Count() - 1; j++)
+                        {
+                            if (target.ToLower() == fighters.group[j].name.ToLower())
+                            {
+                                if (fighters.group[j].health > 0)
+                                {
+                                    if(group[i].isDino)
+                                    {
+                                        group[i].Attack(fighters.group[j], group[i]);
+                                    }
+                                    else
+                                    {
+                                        group[i].Attack(fighters.group[j], group[i], player);
+                                    }
+                                    playerRunning = false;
+                                    break;
+                                }
+                                else
+                                {
+                                    Console.WriteLine("\n" + fighters.group[j].name + " has already been defeated, please choose another dino");
+                                    break;
+                                }
+                            }
+                        }
+                        if (playerRunning)
+                        {
+                            Console.WriteLine("Please enter a valid choice.\n");
+                        }
+
+                    } while (playerRunning);
+
+                    if (!playerRunning)
+                    {
+                        Recharge(group[i]);
+                        break;
+                    }
+                }
+            }
+            else
+            {
+                for (int i = 0; i < group.Count; i++)
+                {
+                    if (!CheckHealth(group[i]) && !CheckEnergy(group[i]))
+                    {
+                        foreach (Fighter fighter in fighters.group)
+                        {
+                            if (fighter.health > 0)
+                            {
+                                group[i].WeaponSwap(player);
+                                if (group[i].isDino)
+                                {
+                                    group[i].Attack(fighter, group[i]);
+                                }
+                                else
+                                {
+                                    group[i].Attack(fighter, group[i], player);
+                                }
+                                Recharge(group[i]);
+                                playerRunning = false;
+                                break;
+                            }
+                        }
+                        if (!playerRunning)
+                        {
+                            break;
+                        }
+                    }
+                }
+            }
+            return;
         }
     }
 }

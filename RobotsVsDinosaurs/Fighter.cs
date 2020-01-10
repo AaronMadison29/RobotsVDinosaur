@@ -12,17 +12,19 @@ namespace RobotsVsDinosaurs
         public string name;
         public int maxEnergy;
         public int energy;
-        public bool attacker;
         public int health;
         int attackPower;
+        public bool attacker;
+        public bool isDino;
 
-        public Fighter(string inputName, int inputEnergy, int inputHealth, int inputAttackPower)
+        public Fighter(string inputName, int inputEnergy, int inputHealth, int inputAttackPower, bool isDinoIn)
         {
             name = inputName;
             maxEnergy = inputEnergy;
             energy = maxEnergy;
             health = inputHealth;
             attackPower = inputAttackPower;
+            isDino = isDinoIn;
         }
 
         public virtual void Attack(Fighter fighterTarget, Fighter fighter)

@@ -19,7 +19,7 @@ namespace RobotsVsDinosaurs
         Random random = new Random();
 
 
-        public Dinosaur(string inputName,int inputEnergy, int inputHealth, int inputAttackPower) : base(inputName, inputEnergy, inputHealth, inputAttackPower)
+        public Dinosaur(string inputName,int inputEnergy, int inputHealth, int inputAttackPower, bool isDinoIn) : base(inputName, inputEnergy, inputHealth, inputAttackPower, isDinoIn)
         {
             name = inputName;
             maxEnergy = inputEnergy;
