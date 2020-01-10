@@ -8,10 +8,11 @@ namespace RobotsVsDinosaurs
 {
     class Gun : Weapon
     {
-        public Gun(string weaponType) : base(weaponType)
+        public Gun()
         {
             weaponType = "Gun";
-            powerLevel = 10;
+            attackPower = 10;
+            hitChance = 95;
         }
     }
 }

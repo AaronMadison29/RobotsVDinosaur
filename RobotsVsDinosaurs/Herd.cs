@@ -13,9 +13,9 @@ namespace RobotsVsDinosaurs
 
         public Herd()
         {
-            Dinosaur dinoOne = new Dinosaur("trex", 2);
-            Dinosaur dinoTwo = new Dinosaur("raptor", 4);
-            Dinosaur dinoThree = new Dinosaur("turkey", 6);
+            Dinosaur dinoOne = new Dinosaur("TRex", 2);
+            Dinosaur dinoTwo = new Dinosaur("Raptor", 4);
+            Dinosaur dinoThree = new Dinosaur("Turkey", 6);
 
             dinoHerd.Add(dinoOne);
             dinoHerd.Add(dinoTwo);
@@ -127,13 +127,13 @@ namespace RobotsVsDinosaurs
 
                         foreach (Robot robo in targetFleet.roboFleet)
                         {
-                            if (robo.health >= 0)
+                            if (robo.health > 0)
                             {
-                                Console.WriteLine(robo.name + "(" + robo.health + " HP " + robo.powerLevel + "E)");
+                                Console.WriteLine("-" + robo.name + "-" + "(" + robo.health + " HP " + robo.powerLevel + "E)");
                             }
                             else
                             {
-                                Console.WriteLine(robo.name + "(KO)");
+                                Console.WriteLine("-" + robo.name + "-" + "(KO)");
                             }
                         }
 
@@ -141,7 +141,7 @@ namespace RobotsVsDinosaurs
 
                         for (int j = 0; j <= targetFleet.roboFleet.Count() - 1; j++)
                         {
-                            if (target == targetFleet.roboFleet[j].name.ToLower())
+                            if (target.ToLower() == targetFleet.roboFleet[j].name.ToLower())
                             {
                                 if (targetFleet.roboFleet[j].health > 0)
                                 {
@@ -151,14 +151,14 @@ namespace RobotsVsDinosaurs
                                 }
                                 else
                                 {
-                                    Console.WriteLine(targetFleet.roboFleet[j].name + " has already been defeated, please choose another dino");
+                                    Console.WriteLine("\n" + targetFleet.roboFleet[j].name + " has already been defeated, please choose another dino");
                                     break;
                                 }
                             }
                         }
                         if (playerRunning)
                         {
-                            Console.WriteLine("Please enter a valid choice.");
+                            Console.WriteLine("Please enter a valid choice.\n");
                         }
 
                     } while (playerRunning);

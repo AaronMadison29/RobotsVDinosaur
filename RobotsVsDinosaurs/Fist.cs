@@ -6,13 +6,11 @@ using System.Threading.Tasks;
 
 namespace RobotsVsDinosaurs
 {
-    class Claw : Weapon
+    class Fist : Weapon
     {
-        public Claw()
+        public Fist()
         {
-            weaponType = "Claw";
-            attackPower = 9;
-            hitChance = 75;
+            weaponType = "Fist";
         }
     }
 }

@@ -9,10 +9,11 @@ namespace RobotsVsDinosaurs
     class Axe : Weapon
     {
 
-        public Axe(string weaponType) : base(weaponType)
+        public Axe() : base()
         {
             weaponType = "Axe";
-            powerLevel = 4;
+            attackPower = 4;
+            hitChance = 75;
         }
     }
 }

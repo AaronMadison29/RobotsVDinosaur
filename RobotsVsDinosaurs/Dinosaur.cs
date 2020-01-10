@@ -6,18 +6,6 @@ using System.Threading.Tasks;
 
 namespace RobotsVsDinosaurs
 {
-
-    //Has:
-    //Type: the type of dinosaur in the current instance
-    //Health: The hitpoints of the current instance
-    //Attack Power: The amount of base damage a dinosaur does when it attacks
-    //Weapon Type: The type of weapon the dinosaur is using to attack in this instance
-
-    //Does:
-    //Creates a dinosaur with given parameters
-    //Can attack the given robot
-
-
     class Dinosaur
     {
         public string type;
@@ -28,9 +16,6 @@ namespace RobotsVsDinosaurs
         int attackPower = 10;
         Weapon attack;
         Weapon[] attackArray = new Weapon[3];
-        Weapon bite = new Weapon("Bite");
-        Weapon claw = new Weapon("Claw");
-        Weapon tail = new Weapon("Tail");
         Random random = new Random();
 
 
@@ -39,14 +24,20 @@ namespace RobotsVsDinosaurs
             type = inputType;
             maxEnergy = inputEnergy;
             energy = maxEnergy;
-        }
 
-        public void weaponSwap()
-        {
+            Bite bite = new Bite();
+            Claw claw = new Claw();
+            Tail tail = new Tail();
+
             attackArray[0] = bite;
             attackArray[1] = claw;
             attackArray[2] = tail;
 
+            attack = new Weapon();
+        }
+
+        public void weaponSwap()
+        {
             attack = attackArray[random.Next(0, 3)];
         }
 
@@ -56,18 +47,25 @@ namespace RobotsVsDinosaurs
         public void Attack(Robot roboTarget)
         {
             weaponSwap();
-
-            roboTarget.health -= attackPower + attack.powerLevel;
-            energy--;
             attacker = true;
-            Console.WriteLine("\n" + this.type + " attacked " + roboTarget.name + " with " + attack.weaponType + " for " + (attackPower + attack.powerLevel) + " damage.");
-            if(roboTarget.health <= 0)
+            energy--;
+            
+            if (attack.swing())
             {
-                Console.WriteLine("\nKnockout!");
+                roboTarget.health -= attackPower + attack.attackPower;
+                Console.WriteLine("\n" + this.type + " hit " + roboTarget.name + " with " + attack.weaponType + " for " + (attackPower + attack.attackPower) + " damage.");
+                if (roboTarget.health <= 0)
+                {
+                    Console.WriteLine("\nKnockout!");
+                }
+                else
+                {
+                    Console.WriteLine(roboTarget.name + " has " + roboTarget.health + " health remaining.\n");
+                }
             }
             else
             {
-                Console.WriteLine(roboTarget.name + " has " + roboTarget.health + " health remaining.\n");
+                Console.WriteLine("\n" + type + " attacked " + roboTarget.name + " with " + attack.weaponType + " but missed!");
             }
 
             

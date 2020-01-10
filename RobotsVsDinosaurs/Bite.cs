@@ -8,10 +8,11 @@ namespace RobotsVsDinosaurs
 {
     class Bite : Weapon
     {
-        public Bite(string weaponType) : base(weaponType)
+        public Bite()
         {
             weaponType = "Bite";
-            powerLevel = 10;
+            attackPower = 10;
+            hitChance = 100;
         }
     }
 }

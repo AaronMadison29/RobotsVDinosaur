@@ -8,10 +8,11 @@ namespace RobotsVsDinosaurs
 {
     class Tail : Weapon
     {
-        public Tail(string weaponType) : base(weaponType)
+        public Tail()
         {
             weaponType = "Tail";
-            powerLevel = 6;
+            attackPower = 6;
+            hitChance = 85;
         }
     }
 }

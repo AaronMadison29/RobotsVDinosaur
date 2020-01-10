@@ -17,30 +17,29 @@ namespace RobotsVsDinosaurs
         List<Weapon> roboWeapons = new List<Weapon>();
         Random random = new Random();
         Weapon weapon;
-        Weapon axe;
-        Weapon sword;
-        Weapon gun;
 
 
         public Robot(string inputName, int inputPowerLevel)
         {
-            axe = new Axe("Axe");
-            sword = new Sword("Sword");
-            weapon = new Weapon("Fist");
-            gun = new Gun("Gun");
-
             name = inputName;
             maxPower = inputPowerLevel;
             powerLevel = maxPower;
 
+            Axe axe = new Axe();
+            Sword sword = new Sword();
+            Gun gun = new Gun();
+
+            roboWeapons.Add(axe);
+            roboWeapons.Add(sword);
+            roboWeapons.Add(gun);
+
+            weapon = new Fist();
         }
 
 
         public void weaponSwap(bool player)
         {
-            roboWeapons.Add(axe);
-            roboWeapons.Add(sword);
-            roboWeapons.Add(gun);
+            
             
             if(!player)
             {
@@ -49,32 +48,26 @@ namespace RobotsVsDinosaurs
             }
             else
             {
-                Console.WriteLine("Would you like to use a different weapon?(y/n)");
+                Console.WriteLine("\nWould you like to use a different weapon?(y/n)");
                 string choice = Console.ReadLine();
                 if (choice == "y")
                 {
-                    Console.WriteLine("Choose a weapon: ");
-                    Console.WriteLine("1: Axe");
-                    Console.WriteLine("2: Sword");
-                    Console.WriteLine("3: Gun");
+
+                    Console.WriteLine("\nChoose a weapon: ");
+                    foreach (Weapon weapon in roboWeapons)
+                    {
+                        Console.WriteLine("-" + weapon.weaponType + "-");
+                    }
                     string weaponName = Console.ReadLine();
 
-                    switch (weaponName)
+                    foreach(Weapon weapon in roboWeapons)
                     {
-                        case "1":
-                            weapon = roboWeapons[0];
+                        if(weaponName.ToLower() == weapon.weaponType.ToLower())
+                        {
+                            this.weapon = weapon;
                             Console.WriteLine("\nBob switched to his " + weapon.weaponType);
                             break;
-                        case "2":
-                            weapon = roboWeapons[1];
-                            Console.WriteLine("\nBob switched to his " + weapon.weaponType);
-                            break;
-                        case "3":
-                            weapon = roboWeapons[2];
-                            Console.WriteLine("\nBob switched to his " + weapon.weaponType);
-                            break;
-                        default:
-                            break;
+                        }
                     }
                 }
             }   
@@ -84,17 +77,26 @@ namespace RobotsVsDinosaurs
         {
             weaponSwap(player);
             attacker = true;
-            dinoTarget.health -= attackPower + weapon.powerLevel;
             powerLevel--;
-            Console.WriteLine("\n" + name + " attacked " + dinoTarget.type + " with " + weapon.weaponType + " for " + (attackPower + weapon.powerLevel) + " damage.");
-            if (dinoTarget.health <= 0)
+
+            if (weapon.swing())
             {
-                Console.WriteLine("Knockout!");
+                dinoTarget.health -= attackPower + weapon.attackPower;
+                Console.WriteLine("\n" + name + " hit " + dinoTarget.type + " with " + weapon.weaponType + " for " + (attackPower + weapon.attackPower) + " damage.");
+                if (dinoTarget.health <= 0)
+                {
+                    Console.WriteLine("Knockout!");
+                }
+                else
+                {
+                    Console.WriteLine(dinoTarget.type + " has " + dinoTarget.health + " health remaining.\n");
+                }
             }
             else
             {
-                Console.WriteLine(dinoTarget.type + " has " + dinoTarget.health + " health remaining.\n");
+                Console.WriteLine("\n" + name + " attacked " + dinoTarget.type + " with " + weapon.weaponType + " but missed!");
             }
+            
         }
     }
 }

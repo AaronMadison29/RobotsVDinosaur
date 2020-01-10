@@ -14,9 +14,9 @@ namespace RobotsVsDinosaurs
 
         public Fleet()
         {
-            Robot roboOne = new Robot("bob", 1);
-            Robot roboTwo = new Robot("frank", 3);
-            Robot roboThree = new Robot("jim", 5);
+            Robot roboOne = new Robot("Bob", 1);
+            Robot roboTwo = new Robot("Frank", 3);
+            Robot roboThree = new Robot("Jim", 5);
             
 
 
@@ -111,20 +111,20 @@ namespace RobotsVsDinosaurs
 
                         foreach (Dinosaur dino in targetHerd.dinoHerd)
                         {
-                            if (dino.health >= 0)
+                            if (dino.health > 0)
                             {
-                                Console.WriteLine(dino.type + "(" + dino.health + " HP " + dino.energy + "E)");
+                                Console.WriteLine("-" + dino.type+ "-" + "(" + dino.health + " HP " + dino.energy + "E)");
                             }
                             else
                             {
-                                Console.WriteLine(dino.type + "(KO)");
+                                Console.WriteLine("-" + dino.type + "-" + "(KO)");
                             }
                         }
 
                         string target = Console.ReadLine();
                         for(int j = 0; j <= targetHerd.dinoHerd.Count() - 1; j++)
                         {
-                            if(target == targetHerd.dinoHerd[j].type.ToLower())
+                            if(target.ToLower() == targetHerd.dinoHerd[j].type.ToLower())
                             {
                                 if (targetHerd.dinoHerd[j].health > 0)
                                 {
@@ -134,14 +134,14 @@ namespace RobotsVsDinosaurs
                                 }
                                 else
                                 {
-                                    Console.WriteLine(targetHerd.dinoHerd[j].type + " has already been defeated, please choose another dino");
+                                    Console.WriteLine("\n" + targetHerd.dinoHerd[j].type + " has already been defeated, please choose another dino");
                                     break;
                                 }
                             }
                         }
                         if(playerRunning)
                         {
-                            Console.WriteLine("Please enter a valid choice.");
+                            Console.WriteLine("Please enter a valid choice.\n");
                         }
 
                     } while (playerRunning);

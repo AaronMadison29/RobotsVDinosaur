@@ -10,16 +10,27 @@ namespace RobotsVsDinosaurs
     {
 
         public string weaponType;
-        public int powerLevel;
-        
+        public int attackPower;
+        public double hitChance;
+        Random ran = new Random();
 
-        public Weapon(string typeInput)
+        public Weapon()
         {
-            weaponType = typeInput;
-            powerLevel = 0;
+            hitChance = 100;
+            attackPower = 0;
         }
 
-        
+        public bool swing()
+        {
+            if(ran.Next(101) > hitChance)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
 
         
     }
