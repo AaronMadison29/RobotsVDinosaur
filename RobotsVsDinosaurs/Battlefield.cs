@@ -86,20 +86,20 @@ namespace RobotsVsDinosaurs
 
                 if(robots.player && dinosaurs.player)
                 {
-                    Console.WriteLine(robots.getFleetStats());
+                    Console.WriteLine(robots.getFleetStats()+ "\n");
                     robots.attackSequence(dinosaurs);
-                    Console.WriteLine(dinosaurs.getHerdStats());
+                    Console.WriteLine(dinosaurs.getHerdStats() + "\n");
                     dinosaurs.attackSequence(robots);
                 }
                 else if (robots.player)
                 {
-                    Console.WriteLine(robots.getFleetStats());
+                    Console.WriteLine(robots.getFleetStats() + "\n");
                     robots.attackSequence(dinosaurs);
                     dinosaurs.attackSequence(robots);
                 }
                 else if (dinosaurs.player)
                 {
-                    Console.WriteLine(dinosaurs.getHerdStats());
+                    Console.WriteLine(dinosaurs.getHerdStats() + "\n");
                     dinosaurs.attackSequence(robots);
                     robots.attackSequence(dinosaurs);
                 }

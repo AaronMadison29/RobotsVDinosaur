@@ -13,9 +13,9 @@ namespace RobotsVsDinosaurs
 
         public Herd()
         {
-            Dinosaur dinoOne = new Dinosaur("T-Rex", 2);
-            Dinosaur dinoTwo = new Dinosaur("Raptor", 4);
-            Dinosaur dinoThree = new Dinosaur("Pteradactyl", 6);
+            Dinosaur dinoOne = new Dinosaur("trex", 2);
+            Dinosaur dinoTwo = new Dinosaur("raptor", 4);
+            Dinosaur dinoThree = new Dinosaur("turkey", 6);
 
             dinoHerd.Add(dinoOne);
             dinoHerd.Add(dinoTwo);
@@ -88,29 +88,28 @@ namespace RobotsVsDinosaurs
 
         public void attackSequence(Fleet targetFleet)
         {
-
+            bool playerRunning = true;
             if (player == false)
             {
+                
+
                 for (int i = 0; i < dinoHerd.Count; i++)
                 {
                     if (checkHealth(dinoHerd[i]) && checkEnergy(dinoHerd[i]))
                     {
-                        if (targetFleet.roboFleet[0].health > 0)
+                        foreach (Robot robo in targetFleet.roboFleet)
                         {
-                            dinoHerd[i].Attack(targetFleet.roboFleet[0]);
-                            rest(dinoHerd[i]);
-                            break;
+                            if (robo.health > 0)
+                            {
+                                dinoHerd[i].weaponSwap();
+                                dinoHerd[i].Attack(robo);
+                                rest(dinoHerd[i]);
+                                playerRunning = false;
+                                break;
+                            }
                         }
-                        else if (targetFleet.roboFleet[1].health > 0)
+                        if(!playerRunning)
                         {
-                            dinoHerd[i].Attack(targetFleet.roboFleet[1]);
-                            rest(dinoHerd[i]);
-                            break;
-                        }
-                        else if (targetFleet.roboFleet[2].health > 0)
-                        {
-                            dinoHerd[i].Attack(targetFleet.roboFleet[2]);
-                            rest(dinoHerd[i]);
                             break;
                         }
                     }
@@ -118,91 +117,48 @@ namespace RobotsVsDinosaurs
             }
             else
             {
-                bool playerRunning = true;
-                
 
                 for (int i = 0; i < dinoHerd.Count(); i++)
                 {
                     do
                     {
 
-                        if(!checkHealth(dinoHerd[i]))
-                        {
-                            break;
-                        }
-                        if(!checkEnergy(dinoHerd[i]))
-                        {
-                            break;
-                        }
-
-                        playerRunning = true;
-
                         Console.WriteLine("Who should " + dinoHerd[i].type + " attack?");
-                        if (targetFleet.roboFleet[0].health >= 0)
+
+                        foreach (Robot robo in targetFleet.roboFleet)
                         {
-                            Console.WriteLine("1:" + targetFleet.roboFleet[0].name + "(" + targetFleet.roboFleet[0].health + " HP " + targetFleet.roboFleet[0].powerLevel + "E)");
-                        }
-                        else
-                        {
-                            Console.WriteLine("1:" + targetFleet.roboFleet[0].name + "(KO)");
+                            if (robo.health >= 0)
+                            {
+                                Console.WriteLine(robo.name + "(" + robo.health + " HP " + robo.powerLevel + "E)");
+                            }
+                            else
+                            {
+                                Console.WriteLine(robo.name + "(KO)");
+                            }
                         }
 
-                        if (targetFleet.roboFleet[1].health >= 0)
-                        {
-                            Console.WriteLine("2:" + targetFleet.roboFleet[1].name + "(" + targetFleet.roboFleet[1].health + " HP " + targetFleet.roboFleet[1].powerLevel + "E)");
-                        }
-                        else
-                        {
-                            Console.WriteLine("2:" + targetFleet.roboFleet[1].name + "(KO)");
-                        }
-                        if (targetFleet.roboFleet[2].health >= 0)
-                        {
-                            Console.WriteLine("3:" + targetFleet.roboFleet[2].name + "(" + targetFleet.roboFleet[2].health + " HP " + targetFleet.roboFleet[2].powerLevel + "E)");
-                        }
-                        else
-                        {
-                            Console.WriteLine("3:" + targetFleet.roboFleet[2].name + "(KO)");
-                        }
                         string target = Console.ReadLine();
 
-                        switch (target)
+                        for (int j = 0; j <= targetFleet.roboFleet.Count() - 1; j++)
                         {
-                            case "1":
-                                if (targetFleet.roboFleet[0].health > 0)
+                            if (target == targetFleet.roboFleet[j].name.ToLower())
+                            {
+                                if (targetFleet.roboFleet[j].health > 0)
                                 {
-                                    dinoHerd[i].Attack(targetFleet.roboFleet[0]);
+                                    dinoHerd[i].Attack(targetFleet.roboFleet[j]);
                                     playerRunning = false;
+                                    break;
                                 }
                                 else
                                 {
-                                    Console.WriteLine(targetFleet.roboFleet[0].name + " has already been defeated, please choose another dino");
+                                    Console.WriteLine(targetFleet.roboFleet[j].name + " has already been defeated, please choose another dino");
+                                    break;
                                 }
-                                break;
-                            case "2":
-                                if (targetFleet.roboFleet[1].health > 0)
-                                {
-                                    dinoHerd[i].Attack(targetFleet.roboFleet[1]);
-                                    playerRunning = false;
-                                }
-                                else
-                                {
-                                    Console.WriteLine(targetFleet.roboFleet[1].name + " has already been defeated, please choose another dino");
-                                }
-                                break;
-                            case "3":
-                                if (targetFleet.roboFleet[2].health > 0)
-                                {
-                                    dinoHerd[i].Attack(targetFleet.roboFleet[2]);
-                                    playerRunning = false;
-                                }
-                                else
-                                {
-                                    Console.WriteLine(targetFleet.roboFleet[2].name + " has already been defeated, please choose another dino");
-                                }
-                                break;
-                            default:
-                                Console.WriteLine("Please choose a valid Dino");
-                                break;
+                            }
+                        }
+                        if (playerRunning)
+                        {
+                            Console.WriteLine("Please enter a valid choice.");
                         }
 
                     } while (playerRunning);
