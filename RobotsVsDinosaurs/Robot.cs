@@ -51,28 +51,40 @@ namespace RobotsVsDinosaurs
             }
             else
             {
+                bool running = true;
                 Console.WriteLine("\nWould you like to use a different weapon?(y/n)");
                 string choice = Console.ReadLine();
                 if (choice == "y")
                 {
-
-                    Console.WriteLine("\nChoose a weapon: ");
-                    foreach (Weapon weapon in roboWeapons)
+                    do
                     {
-                        Console.WriteLine("-" + weapon.weaponType + "-");
-                    }
-                    string weaponName = Console.ReadLine();
-
-                    foreach(Weapon weapon in roboWeapons)
-                    {
-                        if(weaponName.ToLower() == weapon.weaponType.ToLower())
+                        Console.WriteLine("\nChoose a weapon: ");
+                        foreach (Weapon weapon in roboWeapons)
                         {
-                            this.weapon = weapon;
-                            Console.WriteLine("\nBob switched to his " + weapon.weaponType);
-                            break;
+                            Console.WriteLine("-" + weapon.weaponType + "-");
                         }
-                    }
+                        string weaponName = Console.ReadLine();
+
+
+                        foreach (Weapon weapon in roboWeapons)
+                        {
+                            if (weaponName.ToLower() == weapon.weaponType.ToLower())
+                            {
+                                this.weapon = weapon;
+                                Console.WriteLine("\nBob switched to his " + weapon.weaponType);
+                                running = false;
+                                break;
+                            }
+                        }
+                        if (running)
+                        {
+                            Console.WriteLine("\nPlease enter a vaild option.");
+                        }
+                    } while (running);
                 }
+
+                
+                
             }   
         }
 

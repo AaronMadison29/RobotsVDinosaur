@@ -64,16 +64,55 @@ namespace RobotsVsDinosaurs
                 if (robos.player == true || dinos.player == true)
                 {
                     break;
+                }
+            }
+            Console.Clear();
+        }
 
+        public bool IsGameOver()
+        {
+            int deathToll = 0;
+            foreach (Fighter fighter in dinosaurs.group)
+            {
+                if (fighter.health > 0)
+                {
+                    break;
+                }
+                else
+                {
+                    deathToll++;
                 }
 
-                
+            }
+            if (deathToll == 3)
+            {
+                Console.Clear();
+                Console.WriteLine(dinosaurs.GetStats());
+                Console.WriteLine(robots.GetStats() + "\n");
+                Console.WriteLine("\nRobots win!");
+                return true;
             }
 
+            deathToll = 0;
+            foreach (Fighter fighter in robots.group)
+            {
+                if (fighter.health > 0)
+                {
+                    break;
+                }
+                else
+                {
+                    deathToll++;
+                }
 
-            Console.Clear();
+            }
+            if (deathToll == 3)
+            {
+                Console.WriteLine("\nDinoSaurs win!");
+                return true;
+            }
 
-
+            return false;
         }
 
         public void Battle()
@@ -103,51 +142,11 @@ namespace RobotsVsDinosaurs
                     dinosaurs.AttackSequence(robots);
                     robots.AttackSequence(dinosaurs);
                 }
-                
 
-
-
-                int deathToll = 0;
-                foreach (Fighter fighter in dinosaurs.group)
+                if(IsGameOver())
                 {
-                    if (fighter.health > 0)
-                    {
-                        break;
-                    }
-                    else
-                    {
-                        deathToll++;
-                    }
-
-                }
-                if (deathToll == 3)
-                {
-                    Console.Clear();
-                    Console.WriteLine(dinosaurs.GetStats());
-                    Console.WriteLine(robots.GetStats() + "\n");
-                    Console.WriteLine("\nRobots win!");
                     break;
                 }
-
-                deathToll = 0;
-                foreach (Fighter fighter in robots.group)
-                {
-                    if (fighter.health > 0)
-                    {
-                        break;
-                    }
-                    else
-                    {
-                        deathToll++;
-                    }
-
-                }
-                if (deathToll == 3)
-                {
-                    Console.WriteLine("\nDinoSaurs win!");
-                    break;
-                }
-
 
                 Console.WriteLine("\nPress Enter to start the next turn");
                 Console.ReadLine();

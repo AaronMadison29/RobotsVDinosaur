@@ -134,13 +134,15 @@ namespace RobotsVsDinosaurs
                                 }
                                 else
                                 {
-                                    Console.WriteLine("\n" + fighters.group[j].name + " has already been defeated, please choose another dino");
+                                    Console.Clear();
+                                    Console.WriteLine(fighters.group[j].name + " has already been defeated.");
                                     break;
                                 }
                             }
                         }
                         if (playerRunning)
                         {
+                            Console.Clear();
                             Console.WriteLine("Please enter a valid choice.\n");
                         }
 
