@@ -6,24 +6,27 @@ using System.Threading.Tasks;
 
 namespace RobotsVsDinosaurs
 {
-    class Dinosaur
+    class Dinosaur : Fighter
     {
-        public string type;
-        public int health = 50;
-        public int maxEnergy;
-        public int energy;
-        public bool attacker = false;
-        int attackPower = 10;
+        public new string name;
+        public new int health;
+        public new int maxEnergy;
+        public new int energy;
+        public new bool attacker = false;
+        int attackPower;
         Weapon attack;
         Weapon[] attackArray = new Weapon[3];
         Random random = new Random();
 
 
-        public Dinosaur(string inputType,int inputEnergy)
+        public Dinosaur(string inputName,int inputEnergy, int inputHealth, int inputAttackPower) : base(inputName, inputEnergy, inputHealth, inputAttackPower)
         {
-            type = inputType;
+            name = inputName;
             maxEnergy = inputEnergy;
             energy = maxEnergy;
+            health = inputHealth;
+            attackPower = inputAttackPower;
+            attack = new Weapon();
 
             Bite bite = new Bite();
             Claw claw = new Claw();
@@ -33,10 +36,9 @@ namespace RobotsVsDinosaurs
             attackArray[1] = claw;
             attackArray[2] = tail;
 
-            attack = new Weapon();
         }
 
-        public void weaponSwap()
+        public override void WeaponSwap()
         {
             attack = attackArray[random.Next(0, 3)];
         }
@@ -44,31 +46,29 @@ namespace RobotsVsDinosaurs
         
 
 
-        public void Attack(Robot roboTarget)
+        public override void Attack(Fighter fighterTarget, Fighter fighter)
         {
-            weaponSwap();
-            attacker = true;
-            energy--;
-
-
+            WeaponSwap();
+            fighter.attacker = true;
+            fighter.energy--;
 
             if (attack.swing())
             {
                 int damage = attackPower + random.Next(1, attack.attackPower + 1);
-                roboTarget.health -= damage;
-                Console.WriteLine("\n" + this.type + " hit " + roboTarget.name + " with his " + attack.weaponType + " for " + damage + " damage.");
-                if (roboTarget.health <= 0)
+                fighterTarget.health -= damage;
+                Console.WriteLine("\n" + this.name + " hit " + fighterTarget.name + " with his " + attack.weaponType + " for " + damage + " damage.");
+                if (fighterTarget.health <= 0)
                 {
                     Console.WriteLine("\nKnockout!");
                 }
                 else
                 {
-                    Console.WriteLine(roboTarget.name + " has " + roboTarget.health + " health remaining.\n");
+                    Console.WriteLine(fighterTarget.name + " has " + fighterTarget.health + " health remaining.\n");
                 }
             }
             else
             {
-                Console.WriteLine("\n" + type + " attacked " + roboTarget.name + " with his " + attack.weaponType + " but missed!");
+                Console.WriteLine("\n" + name + " attacked " + fighterTarget.name + " with his " + attack.weaponType + " but missed!");
             }
 
 

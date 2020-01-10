@@ -48,6 +48,8 @@
     <Compile Include="Bite.cs" />
     <Compile Include="Claw.cs" />
     <Compile Include="Dinosaur.cs" />
+    <Compile Include="Fighter.cs" />
+    <Compile Include="FighterGroups.cs" />
     <Compile Include="Fist.cs" />
     <Compile Include="Fleet.cs" />
     <Compile Include="Gun.cs" />

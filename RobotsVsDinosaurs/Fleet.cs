@@ -6,135 +6,117 @@ using System.Threading.Tasks;
 
 namespace RobotsVsDinosaurs
 {
-    class Fleet
+    class Fleet : FighterGroups
     {
 
-        public List<Robot> roboFleet = new List<Robot>();
-        public bool player;
+        public new static List<Fighter> group = new List<Fighter>();
 
-        public Fleet()
+        public Fleet() : base(group)
         {
-            Robot roboOne = new Robot("Bob", 1);
-            Robot roboTwo = new Robot("Frank", 3);
-            Robot roboThree = new Robot("Jim", 5);
-            
+            Fighter roboOne = new Robot("Bob", 1, 100, 5);
+            Fighter roboTwo = new Robot("Frank", 3, 100, 5);
+            Fighter roboThree = new Robot("Jim", 5, 100, 5);
 
 
-            roboFleet.Add(roboOne);
-            roboFleet.Add(roboTwo);
-            roboFleet.Add(roboThree);
+
+            group.Add(roboOne);
+            group.Add(roboTwo);
+            group.Add(roboThree);
         }
 
-        public string getFleetStats()
-        {
-            string fleetStats = "";
+        //public string getFleetStats()
+        //{
+        //    string fleetStats = "";
             
-            foreach(Robot robo in roboFleet)
-            {
-                if(robo.health <= 0)
-                {
-                    fleetStats = fleetStats + robo.name + ":KO "; 
-                }
-                else
-                {
-                    fleetStats = fleetStats + robo.name + ":" + robo.health + "HP " + robo.powerLevel +"P ";
-                }
+        //    foreach(Robot robo in group)
+        //    {
+        //        if(robo.health <= 0)
+        //        {
+        //            fleetStats = fleetStats + robo.name + ":KO "; 
+        //        }
+        //        else
+        //        {
+        //            fleetStats = fleetStats + robo.name + ":" + robo.health + "HP " + robo.energy + "P ";
+        //        }
                 
-            }
+        //    }
 
-            return fleetStats;
-        }
+        //    return fleetStats;
+        //}
         
-        public bool checkHealth(Robot roboIn)
-        {
-            if (roboIn.health <= 0)
-            {
-                return false ;
-            }
-            else
-            {
-                return true;
-            }
-        }
+        //public bool checkHealth(Robot roboIn)
+        //{
+        //    if (roboIn.health <= 0)
+        //    {
+        //        return false ;
+        //    }
+        //    else
+        //    {
+        //        return true;
+        //    }
+        //}
 
-        public bool checkPowerLevel(Robot roboIn)
-        {
-            if (roboIn.powerLevel <= 0)
-            {
-                return false;
-            }
-            else
-            {
-                return true;
-            }
-        }
+        //public bool checkPowerLevel(Robot roboIn)
+        //{
+        //    if (roboIn.energy <= 0)
+        //    {
+        //        return false;
+        //    }
+        //    else
+        //    {
+        //        return true;
+        //    }
+        //}
 
-        public void recharge(Robot roboIn)
-        {
-            foreach (Robot robo in roboFleet)
-            {
-                if (!robo.attacker)
-                {
-                    if (robo.powerLevel < robo.maxPower)
-                    {
-                        robo.powerLevel++;
-                    }
-                }
-                else
-                {
-                    roboIn.attacker = false;
-                }
-            }
-        }
 
-        public void attackSequence(Herd targetHerd)
+        public override void AttackSequence(FighterGroups fighters)
         {
             bool playerRunning = true;
 
             if(player)
             {
-                for (int i = 0; i < roboFleet.Count(); i++)
+                for (int i = 0; i < group.Count(); i++)
                 {
                     do
                     {
 
-                        if(!checkHealth(roboFleet[i]))
+                        if(CheckHealth(group[i]))
                         {
                             break;
                         }
-                        if(!checkPowerLevel(roboFleet[i]))
+                        if(CheckEnergy(group[i]))
                         {
                             break;
                         }
 
-                        Console.WriteLine("Who should " + roboFleet[i].name + " attack?");
+                        Console.WriteLine("Who should " + group[i].name + " attack?");
 
-                        foreach (Dinosaur dino in targetHerd.dinoHerd)
+                        foreach (Fighter fighter in fighters.group)
                         {
-                            if (dino.health > 0)
+                            if (fighter.health > 0)
                             {
-                                Console.WriteLine("-" + dino.type+ "-" + "(" + dino.health + " HP " + dino.energy + "E)");
+                                Console.WriteLine("-" + fighter.name + "-" + "(" + fighter.health + " HP " + fighter.energy + "E)");
                             }
                             else
                             {
-                                Console.WriteLine("-" + dino.type + "-" + "(KO)");
+                                Console.WriteLine("-" + fighter.name + "-" + "(KO)");
                             }
                         }
 
                         string target = Console.ReadLine();
-                        for(int j = 0; j <= targetHerd.dinoHerd.Count() - 1; j++)
+                        for(int j = 0; j <= fighters.group.Count() - 1; j++)
                         {
-                            if(target.ToLower() == targetHerd.dinoHerd[j].type.ToLower())
+                            if(target.ToLower() == fighters.group[j].name.ToLower())
                             {
-                                if (targetHerd.dinoHerd[j].health > 0)
+                                if (fighters.group[j].health > 0)
                                 {
-                                    roboFleet[i].Attack(targetHerd.dinoHerd[j], player);
+                                    group[i].Attack(fighters.group[j], group[i], player);
                                     playerRunning = false;
                                     break;
                                 }
                                 else
                                 {
-                                    Console.WriteLine("\n" + targetHerd.dinoHerd[j].type + " has already been defeated, please choose another dino");
+                                    Console.WriteLine("\n" + fighters.group[j].name + " has already been defeated, please choose another dino");
                                     break;
                                 }
                             }
@@ -148,24 +130,24 @@ namespace RobotsVsDinosaurs
 
                     if (!playerRunning)
                     {
-                        recharge(roboFleet[i]);
+                        Recharge(group[i]);
                         break;
                     }
                 }
             }
             else
             {
-                for (int i = 0; i < roboFleet.Count; i++)
+                for (int i = 0; i < group.Count; i++)
                 {
-                    if (checkHealth(roboFleet[i]) && checkPowerLevel(roboFleet[i]))
+                    if (!CheckHealth(group[i]) && !CheckEnergy(group[i]))
                     {
-                        foreach(Dinosaur dino in targetHerd.dinoHerd)
+                        foreach(Fighter fighter in fighters.group)
                         {
-                            if (dino.health > 0)
+                            if (fighter.health > 0)
                             {
-                                roboFleet[i].weaponSwap(player);
-                                roboFleet[i].Attack(dino, player);
-                                recharge(roboFleet[i]);
+                                group[i].WeaponSwap(player);
+                                group[i].Attack(fighter, group[i], player);
+                                Recharge(group[i]);
                                 playerRunning = false;
                                 break;
                             }

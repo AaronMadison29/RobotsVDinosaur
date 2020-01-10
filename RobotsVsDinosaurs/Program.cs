@@ -17,7 +17,7 @@ namespace RobotsVsDinosaurs
 
             Battlefield battlefield = new Battlefield(dinoHerd, roboFleet);
 
-            battlefield.setPlayers(dinoHerd, roboFleet);
+            battlefield.SetPlayers(dinoHerd, roboFleet);
 
             battlefield.Battle();
 

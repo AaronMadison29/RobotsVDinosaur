@@ -6,106 +6,45 @@ using System.Threading.Tasks;
 
 namespace RobotsVsDinosaurs
 {
-    class Herd
+    class Herd : FighterGroups
     {
-        public List<Dinosaur> dinoHerd = new List<Dinosaur>();
-        public bool player;
+        public new static List<Fighter> group = new List<Fighter>();
 
-        public Herd()
+
+        public Herd() : base(group)
         {
-            Dinosaur dinoOne = new Dinosaur("TRex", 2);
-            Dinosaur dinoTwo = new Dinosaur("Raptor", 4);
-            Dinosaur dinoThree = new Dinosaur("Turkey", 6);
+            Fighter dinoOne = new Dinosaur("TRex", 2, 50, 3);
+            Fighter dinoTwo = new Dinosaur("Raptor", 4, 50, 3);
+            Fighter dinoThree = new Dinosaur("Turkey", 6, 50, 3);
 
-            dinoHerd.Add(dinoOne);
-            dinoHerd.Add(dinoTwo);
-            dinoHerd.Add(dinoThree);
+            group.Add(dinoOne);
+            group.Add(dinoTwo);
+            group.Add(dinoThree);
 
 
         }
 
-        public void rest(Dinosaur dinoIn)
-        {
-            foreach (Dinosaur dino in dinoHerd)
-            {
-                if (!dino.attacker)
-                {
-                    if(dino.energy < dino.maxEnergy)
-                    {
-                        dino.energy++;
-                    }
-                }
-                else
-                {
-                    dinoIn.attacker = false;
-                }
-            }
-        }
 
-        public bool checkHealth(Dinosaur dinoIn)
-        {
-            if (dinoIn.health <= 0)
-            {
-                return false;
-            }
-            else
-            {
-                return true;
-            }
-        }
-
-        public bool checkEnergy(Dinosaur dinoIn)
-        {
-            if (dinoIn.energy <= 0)
-            {
-                return false;
-            }
-            else
-            {
-                return true;
-            }
-        }
-
-        public string getHerdStats()
-        {
-            string herdStats = "";
-
-            foreach (Dinosaur dino in dinoHerd)
-            {
-                if (dino.health <= 0)
-                {
-                    herdStats = herdStats + dino.type + ":KO ";
-                }
-                else
-                {
-                    herdStats = herdStats + dino.type + ":" + dino.health + "HP " + dino.energy + "E ";
-                }
-
-            }
-
-            return herdStats;
-        }
-
-        public void attackSequence(Fleet targetFleet)
+        public override void AttackSequence(FighterGroups fighters)
         {
             bool playerRunning = true;
             if (player == false)
             {
                 
 
-                for (int i = 0; i < dinoHerd.Count; i++)
+                for (int i = 0; i < group.Count; i++)
                 {
-                    if (checkHealth(dinoHerd[i]) && checkEnergy(dinoHerd[i]))
+                    if (!CheckHealth(group[i]) && !CheckEnergy(group[i]))
                     {
-                        foreach (Robot robo in targetFleet.roboFleet)
+                        foreach (Fighter fighter in fighters.group)
                         {
-                            if (robo.health > 0)
+                            if (fighter.health > 0)
                             {
-                                dinoHerd[i].weaponSwap();
-                                dinoHerd[i].Attack(robo);
-                                rest(dinoHerd[i]);
+                                group[i].WeaponSwap();
+                                group[i].Attack(fighter, group[i]);
+                                Recharge(group[i]);
                                 playerRunning = false;
-                                break;
+                                break; 
                             }
                         }
                         if(!playerRunning)
@@ -118,40 +57,40 @@ namespace RobotsVsDinosaurs
             else
             {
 
-                for (int i = 0; i < dinoHerd.Count(); i++)
+                for (int i = 0; i < group.Count(); i++)
                 {
                     do
                     {
 
-                        Console.WriteLine("Who should " + dinoHerd[i].type + " attack?");
+                        Console.WriteLine("Who should " + group[i].name + " attack?");
 
-                        foreach (Robot robo in targetFleet.roboFleet)
+                        foreach (Fighter fighter in fighters.group)
                         {
-                            if (robo.health > 0)
+                            if (fighter.health > 0)
                             {
-                                Console.WriteLine("-" + robo.name + "-" + "(" + robo.health + " HP " + robo.powerLevel + "E)");
+                                Console.WriteLine("-" + fighter.name + "-" + "(" + fighter.health + " HP " + fighter.energy + "E)");
                             }
                             else
                             {
-                                Console.WriteLine("-" + robo.name + "-" + "(KO)");
+                                Console.WriteLine("-" + fighter.name + "-" + "(KO)");
                             }
                         }
 
                         string target = Console.ReadLine();
 
-                        for (int j = 0; j <= targetFleet.roboFleet.Count() - 1; j++)
+                        for (int j = 0; j <= fighters.group.Count() - 1; j++)
                         {
-                            if (target.ToLower() == targetFleet.roboFleet[j].name.ToLower())
+                            if (target.ToLower() == fighters.group[j].name.ToLower())
                             {
-                                if (targetFleet.roboFleet[j].health > 0)
+                                if (fighters.group[j].health > 0)
                                 {
-                                    dinoHerd[i].Attack(targetFleet.roboFleet[j]);
+                                    group[i].Attack(fighters.group[j], group[i]);
                                     playerRunning = false;
                                     break;
                                 }
                                 else
                                 {
-                                    Console.WriteLine("\n" + targetFleet.roboFleet[j].name + " has already been defeated, please choose another dino");
+                                    Console.WriteLine("\n" + fighters.group[j].name + " has already been defeated, please choose another dino");
                                     break;
                                 }
                             }
@@ -165,7 +104,7 @@ namespace RobotsVsDinosaurs
 
                     if (!playerRunning)
                     {
-                        rest(dinoHerd[i]);
+                        Recharge(group[i]);
                         break;
                     }
                 }

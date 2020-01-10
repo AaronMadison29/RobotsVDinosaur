@@ -6,24 +6,27 @@ using System.Threading.Tasks;
 
 namespace RobotsVsDinosaurs
 {
-    class Robot
+    class Robot : Fighter
     {
-        public string name;
-        public int health = 100;
-        public int powerLevel = 5;
-        public int maxPower;
-        public bool attacker = false;
-        int attackPower = 5;
+        public new string name;
+        public new int health;
+        public new int energy;
+        public new int maxEnergy;
+        public new bool attacker = false;
+        int attackPower;
         List<Weapon> roboWeapons = new List<Weapon>();
         Random random = new Random();
         Weapon weapon;
 
 
-        public Robot(string inputName, int inputPowerLevel)
+        public Robot(string inputName, int inputEnergy, int inputHealth, int inputAttackPower) : base(inputName, inputEnergy, inputHealth, inputAttackPower)
         {
             name = inputName;
-            maxPower = inputPowerLevel;
-            powerLevel = maxPower;
+            maxEnergy = inputEnergy;
+            energy = maxEnergy;
+            health = inputHealth;
+            attackPower = inputAttackPower;
+            weapon = new Fist();
 
             Axe axe = new Axe();
             Sword sword = new Sword();
@@ -33,11 +36,11 @@ namespace RobotsVsDinosaurs
             roboWeapons.Add(sword);
             roboWeapons.Add(gun);
 
-            weapon = new Fist();
+
         }
 
 
-        public void weaponSwap(bool player)
+        public override void WeaponSwap(bool player)
         {
             
             
@@ -73,29 +76,29 @@ namespace RobotsVsDinosaurs
             }   
         }
 
-        public void Attack(Dinosaur dinoTarget, bool player)
+        public override void Attack(Fighter fighterTarget, Fighter fighter, bool player)
         {
-            weaponSwap(player);
-            attacker = true;
-            powerLevel--;
+            WeaponSwap(player);
+            fighter.attacker = true;
+            fighter.energy--;
 
             if (weapon.swing())
             {
                 int damage = attackPower + random.Next(1, weapon.attackPower + 1);
-                dinoTarget.health -= attackPower + damage;
-                Console.WriteLine("\n" + name + " hit " + dinoTarget.type + " with his " + weapon.weaponType + " for " + damage + " damage.");
-                if (dinoTarget.health <= 0)
+                fighterTarget.health -= damage;
+                Console.WriteLine("\n" + name + " hit " + fighterTarget.name + " with his " + weapon.weaponType + " for " + damage + " damage.");
+                if (fighterTarget.health <= 0)
                 {
                     Console.WriteLine("Knockout!");
                 }
                 else
                 {
-                    Console.WriteLine(dinoTarget.type + " has " + dinoTarget.health + " health remaining.\n");
+                    Console.WriteLine(fighterTarget.name + " has " + fighterTarget.health + " health remaining.\n");
                 }
             }
             else
             {
-                Console.WriteLine("\n" + name + " attacked " + dinoTarget.type + " with his " + weapon.weaponType + " but missed!");
+                Console.WriteLine("\n" + name + " attacked " + fighterTarget.name + " with his " + weapon.weaponType + " but missed!");
             }
             
         }

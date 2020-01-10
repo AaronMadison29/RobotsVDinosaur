@@ -8,8 +8,8 @@ namespace RobotsVsDinosaurs
 {
     class Battlefield
     {
-        public Herd dinosaurs; //Dinosaur heard instance
-        public Fleet robots; //Robot fl
+        public FighterGroups dinosaurs; //Dinosaur heard instance
+        public FighterGroups robots; //Robot fl
         
 
         public Battlefield(Herd dinosCreator, Fleet robosCreator)
@@ -18,7 +18,7 @@ namespace RobotsVsDinosaurs
             robots = robosCreator;
         }
 
-        public void setPlayers(Herd dinos, Fleet robos)
+        public void SetPlayers(Herd dinos, Fleet robos)
         {
             while(true)
             {
@@ -86,31 +86,31 @@ namespace RobotsVsDinosaurs
 
                 if(robots.player && dinosaurs.player)
                 {
-                    Console.WriteLine(robots.getFleetStats()+ "\n");
-                    robots.attackSequence(dinosaurs);
-                    Console.WriteLine(dinosaurs.getHerdStats() + "\n");
-                    dinosaurs.attackSequence(robots);
+                    Console.WriteLine(robots.GetStats()+ "\n");
+                    robots.AttackSequence(dinosaurs);
+                    Console.WriteLine(dinosaurs.GetStats() + "\n");
+                    dinosaurs.AttackSequence(robots);
                 }
                 else if (robots.player)
                 {
-                    Console.WriteLine(robots.getFleetStats() + "\n");
-                    robots.attackSequence(dinosaurs);
-                    dinosaurs.attackSequence(robots);
+                    Console.WriteLine(robots.GetStats() + "\n");
+                    robots.AttackSequence(dinosaurs);
+                    dinosaurs.AttackSequence(robots);
                 }
                 else if (dinosaurs.player)
                 {
-                    Console.WriteLine(dinosaurs.getHerdStats() + "\n");
-                    dinosaurs.attackSequence(robots);
-                    robots.attackSequence(dinosaurs);
+                    Console.WriteLine(dinosaurs.GetStats() + "\n");
+                    dinosaurs.AttackSequence(robots);
+                    robots.AttackSequence(dinosaurs);
                 }
                 
 
 
 
                 int deathToll = 0;
-                foreach (Dinosaur dino in dinosaurs.dinoHerd)
+                foreach (Fighter fighter in dinosaurs.group)
                 {
-                    if (dino.health > 0)
+                    if (fighter.health > 0)
                     {
                         break;
                     }
@@ -127,9 +127,9 @@ namespace RobotsVsDinosaurs
                 }
 
                 deathToll = 0;
-                foreach (Robot robo in robots.roboFleet)
+                foreach (Fighter fighter in robots.group)
                 {
-                    if (robo.health > 0)
+                    if (fighter.health > 0)
                     {
                         break;
                     }
