@@ -11,6 +11,8 @@ namespace RobotsVsDinosaurs
         public string name;
         public int health = 100;
         public int powerLevel = 5;
+        public int maxPower;
+        public bool attacker = false;
         int attackPower = 5;
         List<Weapon> roboWeapons = new List<Weapon>();
         Random random = new Random();
@@ -28,10 +30,11 @@ namespace RobotsVsDinosaurs
             gun = new Gun("Gun");
 
             name = inputName;
-            powerLevel = inputPowerLevel;
-
+            maxPower = inputPowerLevel;
+            powerLevel = maxPower;
 
         }
+
 
         public void weaponSwap(bool player)
         {
@@ -80,6 +83,7 @@ namespace RobotsVsDinosaurs
         public void Attack(Dinosaur dinoTarget, bool player)
         {
             weaponSwap(player);
+            attacker = true;
             dinoTarget.health -= attackPower + weapon.powerLevel;
             powerLevel--;
             Console.WriteLine("\n" + name + " attacked " + dinoTarget.type + " with " + weapon.weaponType + " for " + (attackPower + weapon.powerLevel) + " damage.");

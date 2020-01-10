@@ -22,7 +22,9 @@ namespace RobotsVsDinosaurs
     {
         public string type;
         public int health = 50;
+        public int maxEnergy;
         public int energy;
+        public bool attacker = false;
         int attackPower = 10;
         Weapon attack;
         Weapon[] attackArray = new Weapon[3];
@@ -35,7 +37,8 @@ namespace RobotsVsDinosaurs
         public Dinosaur(string inputType,int inputEnergy)
         {
             type = inputType;
-            energy = inputEnergy;
+            maxEnergy = inputEnergy;
+            energy = maxEnergy;
         }
 
         public void weaponSwap()
@@ -44,8 +47,11 @@ namespace RobotsVsDinosaurs
             attackArray[1] = claw;
             attackArray[2] = tail;
 
-            attack = attackArray[random.Next(0, 2)];
+            attack = attackArray[random.Next(0, 3)];
         }
+
+        
+
 
         public void Attack(Robot roboTarget)
         {
@@ -53,6 +59,7 @@ namespace RobotsVsDinosaurs
 
             roboTarget.health -= attackPower + attack.powerLevel;
             energy--;
+            attacker = true;
             Console.WriteLine("\n" + this.type + " attacked " + roboTarget.name + " with " + attack.weaponType + " for " + (attackPower + attack.powerLevel) + " damage.");
             if(roboTarget.health <= 0)
             {
@@ -65,17 +72,5 @@ namespace RobotsVsDinosaurs
 
             
         }
-        
-
-        //public void dinoAttackSwap(string typeInput)
-        //{
-        //    Console.WriteLine("Weapon options:");
-        //    foreach (string weapon in dinoWeapons)
-        //    {
-        //        Console.WriteLine(weapon);
-        //    }
-        //    Console.WriteLine("Choice: ");
-        //    weaponType = Console.ReadLine();
-        //}
     }
 }

@@ -37,7 +37,7 @@ namespace RobotsVsDinosaurs
                 }
                 else
                 {
-                    fleetStats = fleetStats + robo.name + ":" + robo.health + "HP " + robo.powerLevel +" Energy";
+                    fleetStats = fleetStats + robo.name + ":" + robo.health + "HP " + robo.powerLevel +"P ";
                 }
                 
             }
@@ -69,6 +69,24 @@ namespace RobotsVsDinosaurs
             }
         }
 
+        public void recharge(Robot roboIn)
+        {
+            foreach (Robot robo in roboFleet)
+            {
+                if (!robo.attacker)
+                {
+                    if (robo.powerLevel < robo.maxPower)
+                    {
+                        robo.powerLevel++;
+                    }
+                }
+                else
+                {
+                    roboIn.attacker = false;
+                }
+            }
+        }
+
         public void attackSequence(Herd targetHerd)
         {
             bool playerRunning = true;
@@ -94,7 +112,7 @@ namespace RobotsVsDinosaurs
                         Console.WriteLine("Who should " + roboFleet[i].name + " attack?");
                         if (targetHerd.dinoHerd[0].health >= 0)
                         {
-                            Console.WriteLine("1:" + targetHerd.dinoHerd[0].type + "(" + targetHerd.dinoHerd[0].health + " HP)");
+                            Console.WriteLine("1:" + targetHerd.dinoHerd[0].type + "(" + targetHerd.dinoHerd[0].health + " HP " + targetHerd.dinoHerd[0].energy + "E)");
                         }
                         else
                         {
@@ -103,7 +121,7 @@ namespace RobotsVsDinosaurs
 
                         if (targetHerd.dinoHerd[1].health >= 0)
                         {
-                            Console.WriteLine("2:" + targetHerd.dinoHerd[1].type + "(" + targetHerd.dinoHerd[1].health + " HP)");
+                            Console.WriteLine("2:" + targetHerd.dinoHerd[1].type + "(" + targetHerd.dinoHerd[1].health + " HP " + targetHerd.dinoHerd[1].energy + "E)");
                         }
                         else
                         {
@@ -111,7 +129,7 @@ namespace RobotsVsDinosaurs
                         }
                         if (targetHerd.dinoHerd[2].health >= 0)
                         {
-                            Console.WriteLine("3:" + targetHerd.dinoHerd[2].type + "(" + targetHerd.dinoHerd[2].health + " HP)");
+                            Console.WriteLine("3:" + targetHerd.dinoHerd[2].type + "(" + targetHerd.dinoHerd[2].health + " HP " + targetHerd.dinoHerd[2].energy + "E)");
                         }
                         else
                         {
@@ -165,6 +183,7 @@ namespace RobotsVsDinosaurs
 
                     if (!playerRunning)
                     {
+                        recharge(roboFleet[i]);
                         break;
                     }
                 }
@@ -179,18 +198,21 @@ namespace RobotsVsDinosaurs
                         {
                             roboFleet[i].weaponSwap(player);
                             roboFleet[i].Attack(targetHerd.dinoHerd[0], player);
+                            recharge(roboFleet[i]);
                             break;
                         }
                         else if (targetHerd.dinoHerd[1].health > 0)
                         {
                             roboFleet[i].weaponSwap(player);
                             roboFleet[i].Attack(targetHerd.dinoHerd[1], player);
+                            recharge(roboFleet[i]);
                             break;
                         }
                         else if (targetHerd.dinoHerd[2].health > 0)
                         {
                             roboFleet[i].weaponSwap(player);
                             roboFleet[i].Attack(targetHerd.dinoHerd[2], player);
+                            recharge(roboFleet[i]);
                             break;
                         }
                     }

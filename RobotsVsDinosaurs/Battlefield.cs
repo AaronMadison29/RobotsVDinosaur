@@ -88,6 +88,7 @@ namespace RobotsVsDinosaurs
                 {
                     Console.WriteLine(robots.getFleetStats());
                     robots.attackSequence(dinosaurs);
+                    Console.WriteLine(dinosaurs.getHerdStats());
                     dinosaurs.attackSequence(robots);
                 }
                 else if (robots.player)

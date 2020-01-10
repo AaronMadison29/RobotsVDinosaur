@@ -24,6 +24,24 @@ namespace RobotsVsDinosaurs
 
         }
 
+        public void rest(Dinosaur dinoIn)
+        {
+            foreach (Dinosaur dino in dinoHerd)
+            {
+                if (!dino.attacker)
+                {
+                    if(dino.energy < dino.maxEnergy)
+                    {
+                        dino.energy++;
+                    }
+                }
+                else
+                {
+                    dinoIn.attacker = false;
+                }
+            }
+        }
+
         public bool checkHealth(Dinosaur dinoIn)
         {
             if (dinoIn.health <= 0)
@@ -60,7 +78,7 @@ namespace RobotsVsDinosaurs
                 }
                 else
                 {
-                    herdStats = herdStats + dino.type + ":" + dino.health + "HP " + dino.energy + " Energy";
+                    herdStats = herdStats + dino.type + ":" + dino.health + "HP " + dino.energy + "E ";
                 }
 
             }
@@ -75,21 +93,24 @@ namespace RobotsVsDinosaurs
             {
                 for (int i = 0; i < dinoHerd.Count; i++)
                 {
-                    if (checkHealth(dinoHerd[i]) && !checkEnergy(dinoHerd[i]))
+                    if (checkHealth(dinoHerd[i]) && checkEnergy(dinoHerd[i]))
                     {
                         if (targetFleet.roboFleet[0].health > 0)
                         {
                             dinoHerd[i].Attack(targetFleet.roboFleet[0]);
+                            rest(dinoHerd[i]);
                             break;
                         }
                         else if (targetFleet.roboFleet[1].health > 0)
                         {
                             dinoHerd[i].Attack(targetFleet.roboFleet[1]);
+                            rest(dinoHerd[i]);
                             break;
                         }
                         else if (targetFleet.roboFleet[2].health > 0)
                         {
                             dinoHerd[i].Attack(targetFleet.roboFleet[2]);
+                            rest(dinoHerd[i]);
                             break;
                         }
                     }
@@ -119,7 +140,7 @@ namespace RobotsVsDinosaurs
                         Console.WriteLine("Who should " + dinoHerd[i].type + " attack?");
                         if (targetFleet.roboFleet[0].health >= 0)
                         {
-                            Console.WriteLine("1:" + targetFleet.roboFleet[0].name + "(" + targetFleet.roboFleet[0].health + " HP)");
+                            Console.WriteLine("1:" + targetFleet.roboFleet[0].name + "(" + targetFleet.roboFleet[0].health + " HP " + targetFleet.roboFleet[0].powerLevel + "E)");
                         }
                         else
                         {
@@ -128,7 +149,7 @@ namespace RobotsVsDinosaurs
 
                         if (targetFleet.roboFleet[1].health >= 0)
                         {
-                            Console.WriteLine("2:" + targetFleet.roboFleet[1].name + "(" + targetFleet.roboFleet[1].health + " HP)");
+                            Console.WriteLine("2:" + targetFleet.roboFleet[1].name + "(" + targetFleet.roboFleet[1].health + " HP " + targetFleet.roboFleet[1].powerLevel + "E)");
                         }
                         else
                         {
@@ -136,7 +157,7 @@ namespace RobotsVsDinosaurs
                         }
                         if (targetFleet.roboFleet[2].health >= 0)
                         {
-                            Console.WriteLine("3:" + targetFleet.roboFleet[2].name + "(" + targetFleet.roboFleet[2].health + " HP)");
+                            Console.WriteLine("3:" + targetFleet.roboFleet[2].name + "(" + targetFleet.roboFleet[2].health + " HP " + targetFleet.roboFleet[2].powerLevel + "E)");
                         }
                         else
                         {
@@ -188,6 +209,7 @@ namespace RobotsVsDinosaurs
 
                     if (!playerRunning)
                     {
+                        rest(dinoHerd[i]);
                         break;
                     }
                 }
