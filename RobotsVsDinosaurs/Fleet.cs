@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace RobotsVsDinosaurs
 {
-    class Fleet : FighterGroups
+    class Fleet : FighterGroup
     {
 
         public new static List<Fighter> group = new List<Fighter>();

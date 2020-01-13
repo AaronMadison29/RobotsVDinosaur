@@ -13,9 +13,12 @@ namespace RobotsVsDinosaurs
         public int maxEnergy;
         public int energy;
         public int health;
-        int attackPower;
+        public int attackPower;
         public bool attacker;
         public bool isDino;
+        public Weapon weapon;
+
+        public Random random = new Random();
 
         public Fighter(string inputName, int inputEnergy, int inputHealth, int inputAttackPower, bool isDinoIn)
         {

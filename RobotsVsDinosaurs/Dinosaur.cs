@@ -8,15 +8,7 @@ namespace RobotsVsDinosaurs
 {
     class Dinosaur : Fighter
     {
-        public new string name;
-        public new int health;
-        public new int maxEnergy;
-        public new int energy;
-        public new bool attacker = false;
-        int attackPower;
-        Weapon attack;
         Weapon[] attackArray = new Weapon[3];
-        Random random = new Random();
 
 
         public Dinosaur(string inputName,int inputEnergy, int inputHealth, int inputAttackPower, bool isDinoIn) : base(inputName, inputEnergy, inputHealth, inputAttackPower, isDinoIn)
@@ -26,7 +18,7 @@ namespace RobotsVsDinosaurs
             energy = maxEnergy;
             health = inputHealth;
             attackPower = inputAttackPower;
-            attack = new Weapon();
+            weapon = new Weapon();
 
             Bite bite = new Bite();
             Claw claw = new Claw();
@@ -40,7 +32,7 @@ namespace RobotsVsDinosaurs
 
         public override void WeaponSwap()
         {
-            attack = attackArray[random.Next(0, 3)];
+            weapon = attackArray[random.Next(0, 3)];
         }
 
         
@@ -52,11 +44,11 @@ namespace RobotsVsDinosaurs
             fighter.attacker = true;
             fighter.energy--;
 
-            if (attack.swing())
+            if (weapon.swing())
             {
-                int damage = attackPower + random.Next(1, attack.attackPower + 1);
+                int damage = attackPower + random.Next(1, weapon.attackPower + 1);
                 fighterTarget.health -= damage;
-                Console.WriteLine("\n" + this.name + " hit " + fighterTarget.name + " with his " + attack.weaponType + " for " + damage + " damage.");
+                Console.WriteLine("\n" + this.name + " hit " + fighterTarget.name + " with his " + weapon.weaponType + " for " + damage + " damage.");
                 if (fighterTarget.health <= 0)
                 {
                     Console.WriteLine("\nKnockout!");
@@ -68,7 +60,7 @@ namespace RobotsVsDinosaurs
             }
             else
             {
-                Console.WriteLine("\n" + name + " attacked " + fighterTarget.name + " with his " + attack.weaponType + " but missed!");
+                Console.WriteLine("\n" + name + " attacked " + fighterTarget.name + " with his " + weapon.weaponType + " but missed!");
             }
 
 

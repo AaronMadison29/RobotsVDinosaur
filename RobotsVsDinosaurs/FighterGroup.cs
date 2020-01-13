@@ -6,16 +6,16 @@ using System.Threading.Tasks;
 
 namespace RobotsVsDinosaurs
 {
-    class FighterGroups
+    class FighterGroup
     {
         public bool player;
         public List<Fighter> group = new List<Fighter>();
 
 
 
-        public FighterGroups(List<Fighter> group)
+        public FighterGroup(List<Fighter> groupIn)
         {
-            this.group = group;
+            group = groupIn;
         }
 
         public void Recharge(Fighter fighterIn)
@@ -80,7 +80,7 @@ namespace RobotsVsDinosaurs
             }
         }
 
-        public void AttackSequence(FighterGroups fighters)
+        public void AttackSequence(FighterGroup fighters)
         {
             bool playerRunning = true;
 

@@ -8,8 +8,8 @@ namespace RobotsVsDinosaurs
 {
     class Battlefield
     {
-        public FighterGroups dinosaurs; //Dinosaur heard instance
-        public FighterGroups robots; //Robot fl
+        public FighterGroup dinosaurs; //Dinosaur heard instance
+        public FighterGroup robots; //Robot fl
         
 
         public Battlefield(Herd dinosCreator, Fleet robosCreator)

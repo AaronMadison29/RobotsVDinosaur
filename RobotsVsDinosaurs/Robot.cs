@@ -8,15 +8,7 @@ namespace RobotsVsDinosaurs
 {
     class Robot : Fighter
     {
-        public new string name;
-        public new int health;
-        public new int energy;
-        public new int maxEnergy;
-        public new bool attacker = false;
-        int attackPower;
         List<Weapon> roboWeapons = new List<Weapon>();
-        Random random = new Random();
-        Weapon weapon;
 
 
         public Robot(string inputName, int inputEnergy, int inputHealth, int inputAttackPower, bool isDinoIn) : base(inputName, inputEnergy, inputHealth, inputAttackPower, isDinoIn)
