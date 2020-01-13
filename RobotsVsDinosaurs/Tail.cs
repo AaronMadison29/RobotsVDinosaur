@@ -12,7 +12,7 @@ namespace RobotsVsDinosaurs
         {
             weaponType = "Tail";
             attackPower = 6;
-            hitChance = 85;
+            hitChance = 95;
         }
     }
 }

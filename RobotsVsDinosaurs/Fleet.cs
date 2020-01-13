@@ -13,11 +13,9 @@ namespace RobotsVsDinosaurs
 
         public Fleet() : base(group)
         {
-            Fighter roboOne = new Robot("Bob", 1, 100, 5, false);
-            Fighter roboTwo = new Robot("Frank", 3, 100, 5, false);
-            Fighter roboThree = new Robot("Jim", 5, 100, 5, false);
-
-
+            Robot roboOne = new Robot("Bob", 1, 100, 5);
+            Robot roboTwo = new Robot("Frank", 3, 100, 5);
+            Robot roboThree = new Robot("Jim", 5, 100, 5);
 
             group.Add(roboOne);
             group.Add(roboTwo);

@@ -121,14 +121,7 @@ namespace RobotsVsDinosaurs
                             {
                                 if (fighters.group[j].health > 0)
                                 {
-                                    if(group[i].isDino)
-                                    {
-                                        group[i].Attack(fighters.group[j], group[i]);
-                                    }
-                                    else
-                                    {
-                                        group[i].Attack(fighters.group[j], player);
-                                    }
+                                    group[i].Attack(fighters.group[j], player);
                                     playerRunning = false;
                                     break;
                                 }
@@ -166,14 +159,7 @@ namespace RobotsVsDinosaurs
                             if (fighter.health > 0)
                             {
                                 group[i].WeaponSwap(player);
-                                if (group[i].isDino)
-                                {
-                                    group[i].Attack(fighter, group[i]);
-                                }
-                                else
-                                {
-                                    group[i].Attack(fighter, player);
-                                }
+                                group[i].Attack(fighter, player);
                                 Recharge(group[i]);
                                 playerRunning = false;
                                 break;

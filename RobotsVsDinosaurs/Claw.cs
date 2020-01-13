@@ -12,7 +12,7 @@ namespace RobotsVsDinosaurs
         {
             weaponType = "Claw";
             attackPower = 9;
-            hitChance = 75;
+            hitChance = 85;
         }
     }
 }

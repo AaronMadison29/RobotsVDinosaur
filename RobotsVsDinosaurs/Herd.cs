@@ -13,9 +13,9 @@ namespace RobotsVsDinosaurs
 
         public Herd() : base(group)
         {
-            Fighter dinoOne = new Dinosaur("TRex", 2, 50, 3, true);
-            Fighter dinoTwo = new Dinosaur("Raptor", 4, 50, 3, true);
-            Fighter dinoThree = new Dinosaur("Turkey", 6, 50, 3, true);
+            Dinosaur dinoOne = new Dinosaur("TRex", 2, 50, 3);
+            Dinosaur dinoTwo = new Dinosaur("Raptor", 4, 50, 3);
+            Dinosaur dinoThree = new Dinosaur("Turkey", 6, 50, 3);
 
             group.Add(dinoOne);
             group.Add(dinoTwo);

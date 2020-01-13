@@ -9,9 +9,7 @@ namespace RobotsVsDinosaurs
     class Dinosaur : Fighter
     {
         Weapon[] attackArray = new Weapon[3];
-
-
-        public Dinosaur(string inputName,int inputEnergy, int inputHealth, int inputAttackPower, bool isDinoIn) : base(inputName, inputEnergy, inputHealth, inputAttackPower, isDinoIn)
+        public Dinosaur(string inputName,int inputEnergy, int inputHealth, int inputAttackPower) : base(inputName, inputEnergy, inputHealth, inputAttackPower)
         {
             name = inputName;
             maxEnergy = inputEnergy;
@@ -29,41 +27,9 @@ namespace RobotsVsDinosaurs
             attackArray[2] = tail;
 
         }
-
-        public override void WeaponSwap()
+        public override void WeaponSwap(bool player)
         {
             weapon = attackArray[random.Next(0, 3)];
-        }
-
-        
-
-
-        public override void Attack(Fighter fighterTarget, Fighter fighter)
-        {
-            WeaponSwap();
-            fighter.attacker = true;
-            fighter.energy--;
-
-            if (weapon.swing())
-            {
-                int damage = attackPower + random.Next(1, weapon.attackPower + 1);
-                fighterTarget.health -= damage;
-                Console.WriteLine("\n" + name + " hit " + fighterTarget.name + " with his " + weapon.weaponType + " for " + damage + " damage.");
-                if (fighterTarget.health <= 0)
-                {
-                    Console.WriteLine("\nKnockout!");
-                }
-                else
-                {
-                    Console.WriteLine(fighterTarget.name + " has " + fighterTarget.health + " health remaining.\n");
-                }
-            }
-            else
-            {
-                Console.WriteLine("\n" + name + " attacked " + fighterTarget.name + " with his " + weapon.weaponType + " but missed!");
-            }
-
-
         }
     }
 }
