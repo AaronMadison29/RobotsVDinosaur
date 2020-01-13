@@ -9,7 +9,7 @@ namespace RobotsVsDinosaurs
     class Dinosaur : Fighter
     {
         Weapon[] attackArray = new Weapon[3];
-        public Dinosaur(string inputName,int inputEnergy, int inputHealth, int inputAttackPower) : base(inputName, inputEnergy, inputHealth, inputAttackPower)
+        public Dinosaur(string inputName,int inputEnergy, int inputHealth, int inputAttackPower)
         {
             name = inputName;
             maxEnergy = inputEnergy;

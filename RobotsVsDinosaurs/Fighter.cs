@@ -15,13 +15,9 @@ namespace RobotsVsDinosaurs
 
         public Random random = new Random();
 
-        public Fighter(string inputName, int inputEnergy, int inputHealth, int inputAttackPower)
+        public Fighter()
         {
-            name = inputName;
-            maxEnergy = inputEnergy;
-            energy = maxEnergy;
-            health = inputHealth;
-            attackPower = inputAttackPower;
+
         }
 
         public  void Attack(Fighter fighterTarget, bool player)

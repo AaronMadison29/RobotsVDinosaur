@@ -95,6 +95,7 @@ namespace RobotsVsDinosaurs
                         {
                             break;
                         }
+
                         if (CheckEnergy(group[i]))
                         {
                             break;

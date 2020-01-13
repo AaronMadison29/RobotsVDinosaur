@@ -9,7 +9,7 @@ namespace RobotsVsDinosaurs
     class Robot : Fighter
     {
         List<Weapon> roboWeapons = new List<Weapon>();
-        public Robot(string inputName, int inputEnergy, int inputHealth, int inputAttackPower) : base(inputName, inputEnergy, inputHealth, inputAttackPower)
+        public Robot(string inputName, int inputEnergy, int inputHealth, int inputAttackPower)
         {
             name = inputName;
             maxEnergy = inputEnergy;
@@ -57,7 +57,7 @@ namespace RobotsVsDinosaurs
                             if (weaponName.ToLower() == weapon.weaponType.ToLower())
                             {
                                 this.weapon = weapon;
-                                Console.WriteLine("\nBob switched to his " + weapon.weaponType);
+                                Console.WriteLine("\n" + name + " switched to his " + weapon.weaponType);
                                 running = false;
                                 break;
                             }
