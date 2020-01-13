@@ -15,7 +15,7 @@ namespace RobotsVsDinosaurs
         {
             Dinosaur dinoOne = new Dinosaur("TRex", 2, 100, 3);
             Dinosaur dinoTwo = new Dinosaur("Raptor", 4, 100, 3);
-            Dinosaur dinoThree = new Dinosaur("Turkey", 6, 100, 3);
+            Dinosaur dinoThree = new Dinosaur("Turkey", 15, 100, 3);
 
             group.Add(dinoOne);
             group.Add(dinoTwo);

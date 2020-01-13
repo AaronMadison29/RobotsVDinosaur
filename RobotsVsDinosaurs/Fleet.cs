@@ -15,7 +15,7 @@ namespace RobotsVsDinosaurs
         {
             Robot roboOne = new Robot("Bob", 1, 100, 5);
             Robot roboTwo = new Robot("Frank", 3, 100, 5);
-            Robot roboThree = new Robot("Jim", 5, 100, 5);
+            Robot roboThree = new Robot("Jim", 15, 100, 5);
 
             group.Add(roboOne);
             group.Add(roboTwo);
