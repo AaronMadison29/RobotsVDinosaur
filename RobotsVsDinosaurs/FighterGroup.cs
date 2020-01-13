@@ -127,7 +127,7 @@ namespace RobotsVsDinosaurs
                                     }
                                     else
                                     {
-                                        group[i].Attack(fighters.group[j], group[i], player);
+                                        group[i].Attack(fighters.group[j], player);
                                     }
                                     playerRunning = false;
                                     break;
@@ -172,7 +172,7 @@ namespace RobotsVsDinosaurs
                                 }
                                 else
                                 {
-                                    group[i].Attack(fighter, group[i], player);
+                                    group[i].Attack(fighter, player);
                                 }
                                 Recharge(group[i]);
                                 playerRunning = false;

@@ -56,6 +56,12 @@ namespace RobotsVsDinosaurs
                         }
                     }
                 }
+                else if(players == "0")
+                {
+                    robos.player = false;
+                    dinos.player = false;
+                    break;
+                }
                 else
                 {
                     Console.WriteLine("Please enter a valid option");
@@ -138,6 +144,13 @@ namespace RobotsVsDinosaurs
                 }
                 else if (dinosaurs.player)
                 {
+                    Console.WriteLine(dinosaurs.GetStats() + "\n");
+                    dinosaurs.AttackSequence(robots);
+                    robots.AttackSequence(dinosaurs);
+                }
+                else
+                {
+                    Console.WriteLine(robots.GetStats());
                     Console.WriteLine(dinosaurs.GetStats() + "\n");
                     dinosaurs.AttackSequence(robots);
                     robots.AttackSequence(dinosaurs);

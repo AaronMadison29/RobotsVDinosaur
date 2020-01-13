@@ -80,11 +80,11 @@ namespace RobotsVsDinosaurs
             }   
         }
 
-        public override void Attack(Fighter fighterTarget, Fighter fighter, bool player)
+        public override void Attack(Fighter fighterTarget, bool player)
         {
             WeaponSwap(player);
-            fighter.attacker = true;
-            fighter.energy--;
+            attacker = true;
+            energy--;
 
             if (weapon.swing())
             {

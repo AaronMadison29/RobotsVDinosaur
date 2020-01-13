@@ -35,7 +35,7 @@ namespace RobotsVsDinosaurs
 
         }
 
-        public virtual void Attack(Fighter fighterTarget, Fighter fighter, bool player)
+        public virtual void Attack(Fighter fighterTarget, bool player)
         {
 
         }

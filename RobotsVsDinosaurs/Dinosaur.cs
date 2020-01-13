@@ -48,7 +48,7 @@ namespace RobotsVsDinosaurs
             {
                 int damage = attackPower + random.Next(1, weapon.attackPower + 1);
                 fighterTarget.health -= damage;
-                Console.WriteLine("\n" + this.name + " hit " + fighterTarget.name + " with his " + weapon.weaponType + " for " + damage + " damage.");
+                Console.WriteLine("\n" + name + " hit " + fighterTarget.name + " with his " + weapon.weaponType + " for " + damage + " damage.");
                 if (fighterTarget.health <= 0)
                 {
                     Console.WriteLine("\nKnockout!");
